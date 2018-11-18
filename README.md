@@ -1,5 +1,5 @@
 # Sentiment-Analysis-and-Crowdsourcing
-ASE 1 project
+ASE 1 project.
 Steps to run the project:
 1) go to classifiers folder
 2)execute all the codes in the folder movie_model_complete
