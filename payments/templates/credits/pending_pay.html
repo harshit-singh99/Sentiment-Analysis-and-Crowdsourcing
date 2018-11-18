@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
+</head>
+<body>
+    
+    Please check your inbox for confirmation email.
+    <form action="{% url 'credits.confirm' %}" method="post">
+        {% csrf_token %}
+        Enter the key<br>
+        <input name="pay_key" id="pay_key">
+        <input type="submit" value="Submit">
+        <a href="/credits/transaction_cancel">
+        <input type="button" value="Cancel">
+        </a>
+    </form>
+</body>
+</html>
