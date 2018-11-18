@@ -1,0 +1,110 @@
+{% extends 'authentication/layout.html' %}
+{% load static from staticfiles %}
+{% block headblock %}
+    <style>
+        body{
+            background-image: url("{% static 'bg5.jpg' %}");
+            color: black ;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    .div1{
+            position: relative;
+            margin: auto;
+            width:950px;
+            height:610px;
+            box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
+            background-color: white;
+            border-radius: 10px;
+            overflow: scroll;
+            opacity: 0.95;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="div1">
+        <select id="select_option">
+            <option value="invalid">--Select Option--</option>
+            {% for i in options %}
+                <option value="{{ i }}">
+                {{ i }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select id="select_name">
+            <option value="invalid">--Select Previous--</option>
+        </select>
+        <span id="show_reviews">
+        </span>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+
+
+
+            $("#select_name").change(function () {
+                let url = "{% url 'show_reviews' %}";
+                let option = $("#select_option").val();
+                let idd = $(this).val();
+                if(idd == "invalid"){
+                    return;
+                }
+                $.post(
+                    url,
+                    {
+                        'option': option,
+                        'idd': idd,
+                        'csrfmiddlewaretoken':"{{ csrf_token }}"
+                    },
+                    function (data) {
+                        $("#show_reviews").html(data);
+                        $("#submit_button").click(function(){
+                            console.log("inside click");
+                            let url = "{% url 'write_reviews' %}";
+                            let option = $("#new_data_option").val();
+                            console.log(option);
+                            let idd = $("#new_data_idd").val();
+                            let review = $("#new_data_review").val();
+                            if(review == ""){
+                               return;
+                            }
+                            $.post(
+                                url,
+                                {
+                                    'option': option,
+                                    'idd': idd,
+                                      'review': review,
+                                    'csrfmiddlewaretoken':"{{ csrf_token }}"
+                                },
+                                function (data) {
+
+                                    $("#select_name").trigger("change",idd);
+                                }
+                            );
+                        });
+                    }
+                );
+            });
+
+            $("#select_option").change(function () {
+                let url = "{% url 'show_list' %}";
+                let option = $(this).val();
+                if(option=="invalid"){
+                    return;
+                }
+                $.post(
+                    url,
+                    {
+                        'option': option,
+                        'csrfmiddlewaretoken':"{{ csrf_token }}"
+                    },
+                    function (data) {
+                        $("#select_name").html(data);
+                        $("#show_reviews").html("");
+                    }
+
+                );
+            });
+        </script>
+{% endblock %}

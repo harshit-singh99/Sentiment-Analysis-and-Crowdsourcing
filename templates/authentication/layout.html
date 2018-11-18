@@ -1,0 +1,103 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .img123{
+            float: right;
+            height: 40px;
+            margin-top: 5px;
+        }
+        .topnav {
+            overflow: hidden;
+            width: 100%;
+            top:10px;
+            color: white;
+            background-color: black;
+
+        }
+
+        .button2 {
+
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            margin-right: 0px;
+            padding: 8px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 3px 2px;
+            cursor: pointer;
+            border-radius:4px;
+            transition: 0.5s;
+        }
+        .button1 {
+            background: none;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.5s;
+        }
+        .button1:hover {
+            background-color: #5B7BD5;
+        }
+        .button2:hover{
+            background-color: #5B7BD5;
+        }
+
+
+        {% block style %}
+        {% endblock style %}
+    </style>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+{#    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" >#}
+
+            <div class="topnav">
+                <a href="{% url 'home' %}" > <button class="button1">Home </button></a>
+                <a href="{% url 'review' %}" > <button class="button1">Review </button></a>
+
+                 <select class="button1" onchange="location = this.value">
+                    <option selected disabled hidden class="button1">Sentiment Analysis</option>
+                     <option class="button1" value="{% url 'prediction' %}" >Single Predict   </option>
+                    <option class="button1" value="{% url 'batch_predict' %}">Batch Predict</option></a>
+                </select>
+                {% if not request.user.username %}
+
+                <a href="{% url 'signup' %}"><button class="button2">SignUp</button></a>
+                <a href="{% url 'signin' %}"><button class="button2" name="Login" value="Login"> Login</button></a>
+
+            </div>
+                {% else %}
+
+            <form class="button2" action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-button-nav" style="background-color: transparent;color: #FFFFFF; border: none;">Logout </button>
+            </form>
+              <a href="#"><button class="button2"> {{request.user.username}}</button></a>
+              <img class="img123" src="{% static 'authentication/prof1.png' %}">
+                 {% endif %}
+        </div>
+
+    </nav>
+
+    {% block headblock %}
+    {% endblock headblock %}
+</head>
+<body>
+
+{#<div class="container">#}
+    {% block content %}
+    {% endblock content %}
+{#</div>#}
+</body>
+</html>

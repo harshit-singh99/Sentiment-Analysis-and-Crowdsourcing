@@ -1,0 +1,105 @@
+{% extends 'authentication/layout.html' %}
+{% load static from staticfiles %}
+{% block headblock %}
+
+
+    <style>
+        body{
+            background-image: url("{% static '01.jpg' %}");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+
+        .box{
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+            width:850px;
+            height:580px;
+            box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
+            background-color: white;
+            border-radius: 10px;
+        }
+        .button11{
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.5s;
+        }
+        .button11:hover {
+            background-color: #5B7BD5;
+        }
+        .search_categories{
+            {#font-size: 13px;#}
+            width: 60%;
+        padding: 4px 2px 1px ;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            {#overflow: hidden;#}
+            position: relative;
+        }
+
+        .search_categories .select{
+            width: 40%;
+
+            background:url("{% static 'arrow.png' %}") no-repeat;
+        }
+
+        .search_categories .select select{
+        {#background: transparent;#}
+
+            border: 0;
+            border-radius: 0;
+            width:70%;
+            position: relative;
+
+        }
+    p{
+        margin-left: 60px;
+    }
+    </style>
+
+    <title>Sentiment Analysis</title>
+{% endblock headblock %}
+{% block content %}
+    <div class="box">
+        <form action="{%  url 'prediction' %}" method="post">
+            {% csrf_token %}
+            <br>
+            <center>
+                Select Category:
+                <div class="search_categories">
+
+                    <div class="select">
+
+                        <select name="search_categories" id="search_categories">
+                            <option value="movie" selected="selected">Movies</option>
+                            <option value="restaurant">Restaurant</option>
+
+                        </select>
+                    </div>
+                </div>
+                <br>
+                </center>
+                <p>Predict your review with Sentiment Analysis</p>
+            <p>Have a file of reviews? Wanna Upload? <a href="batchpredict">Click here</a></p>
+                <center>
+                    {{ result }}
+                <textarea name="review" rows = 15 cols = 100  placeholder="{{ review_ph }}"></textarea>
+                <br>
+                <button class="button11">Submit </button>
+            </center>
+        </form>
+
+    </div>
+
+{% endblock %}
