@@ -1,0 +1,102 @@
+{% extends 'authentication/layout.html' %}
+{% load static from staticfiles %}
+{% load dataAnalysis_extras %}
+
+{%  block headblock %}
+
+<style>
+	body{
+		background-image: url("{% static 'data.jpg' %}");
+		background-color: black;
+		color: white;
+		background-attachment: fixed;
+		background-size: 100%;
+	}
+	.div1{
+		width:70%;
+		color: black;
+		background-color: rgb(255,255,255,0.85);
+		border-radius: 50px;
+		margin-left:250px;
+		margin-top:10px;
+	}
+	.table1{
+		margin-left: 10px;
+	}
+	table{
+		width:100%;
+	}
+	td{
+		width: 30%;
+	}
+</style>
+
+{% endblock %}
+{% block content %}
+
+
+<div class="div1">
+	<br>
+<table class="table1">
+<tr>
+<center><td colspan="2"><b> Total Reviews</b> </td></center>
+</tr>
+	<tr>
+<td>total review count :</td><td> {{total_stats.count}}  <br></td></tr>
+<tr>
+<td>average review length:</td> <td>{{total_stats.avg_text_len}} <br></td> </tr>
+<tr><td>50 most frequent words :</td> <td> {{total_stats.freq_words}} <br></td></tr>
+<tr><td>number of latest reviews: </td><td>{{new_count}}
+</table>
+<br>
+<table class="table1">
+
+<tr>
+<center><td colspan="2"> <b>Positive Reviews</b> </td></center>
+</tr>
+<tr><td>positive review count :</td><td> {{pos_stats.count}}  <br></td></tr>
+<tr>
+<td>average positive review length:</td><td> {{pos_stats.avg_text_len}} <br></td> </tr>
+<tr><td>50 most frequent words in positive reviews : </td> <td>{{pos_stats.freq_words}} <br></td></tr>
+<tr><td>positive percent :</td><td> {{posper}} <br></td></tr>
+</table>
+<br>
+<table class="table1">
+	<tr>
+<center><td colspan="2"><b> Negative Reviews</b> </td></center>
+</tr>
+<tr><td>negative review count :</td><td> {{neg_stats.count}}  <br></td></tr>
+<tr><td>average negative review length:</td><td> {{neg_stats.avg_text_len}} <br></td> </tr>
+<tr><td>50 most frequent words in negative reviews :</td><td>  {{neg_stats.freq_words}} <br></td></tr>
+<tr><td>negative percent :</td><td> {{negper}} <br></td></tr>
+
+</table>
+<center>
+	<br>
+<label>positive vs negative reviews</label><br>
+
+
+<img src="{% static type|concat_string:'_graphs/'|concat_string:name|concat_string:'_polarity_counts.png' %}"style = "width: 80%" ><br>
+positive vs negative reviews by gender<br>
+<img src="{% static type|concat_string:'_graphs/'|concat_string:name|concat_string:'_polarity_counts_gender.png' %}"style = "width: 80%" ><br>
+
+box plot of text length vs polarity<br>
+<img src="{% static type|concat_string:'_graphs/'|concat_string:name|concat_string:'_polarity_textlen.png' %}"style = "width: 80%" ><br>
+
+comparison of total reviews across competitors<br>
+<img src="{% static type|concat_string:'_graphs/'|concat_string:name|concat_string:'_all_reviews.png' %}"style = "width: 80%" ><br>
+comparison of reviews by polarity across competitors<br>
+<img src="{% static type|concat_string:'_graphs/'|concat_string:name|concat_string:'_all_polarity.png' %}"style = "width: 80%" ><br>
+
+boxplot of textlength vs polarity across competitors<br>
+<img src="{% static type|concat_string:'_graphs/'|concat_string:name|concat_string:'_all_text.png' %}"style = "width: 80%" ><br>
+piechart of total reviews<br>
+<img src="{% static type|concat_string:'_graphs/'|concat_string:name|concat_string:'_all_reviews_pie.png' %}"style = "width: 80%" ><br>
+
+piechart of positive reviews<br>
+<img src="{% static  type|concat_string:'_graphs/'|concat_string:name|concat_string:'_all_positive_pie.png'  %}"style = "width: 80%" ><br>
+
+</div>
+</center>
+{% endblock %}
+

@@ -6,6 +6,7 @@
         .img123{
             float: right;
             height: 40px;
+            width: 40px;
             margin-top: 5px;
         }
         .topnav {
@@ -63,7 +64,7 @@
 {#    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" >#}
 
             <div class="topnav">
-                <a href="{% url 'home' %}" > <button class="button1">Home </button></a>
+                <a href="{% url 'home' %}" > <button class="button1">The Reviewer </button></a>
                 <a href="{% url 'review' %}" > <button class="button1">Review </button></a>
 
                  <select class="button1" onchange="location = this.value">
@@ -71,9 +72,17 @@
                      <option class="button1" value="{% url 'prediction' %}" >Single Predict   </option>
                     <option class="button1" value="{% url 'batch_predict' %}">Batch Predict</option></a>
                 </select>
+                <select class="button1" onchange="location = this.value">
+                    <option selected disabled hidden class="button1">Credits</option>
+                     <option class="button1" value="{% url 'credits.index' %}" >Add/Redeem   </option>
+                    <option class="button1" value="{% url 'credits.statement' %}">Transactions</option></a>
+                </select>
+                <a href="{% url 'data_analysis' %}" > <button class="button1">Data Analysis </button></a>
+                <a href="{% url 'crdscr_main' %}" > <button class="button1">Crowdsourcing </button></a>
+
                 {% if not request.user.username %}
 
-                <a href="{% url 'signup' %}"><button class="button2">SignUp</button></a>
+                <a href="{% url 'register' %}"><button class="button2">SignUp</button></a>
                 <a href="{% url 'signin' %}"><button class="button2" name="Login" value="Login"> Login</button></a>
 
             </div>
@@ -83,8 +92,9 @@
                 {% csrf_token %}
                 <button type="submit" class="logout-button-nav" style="background-color: transparent;color: #FFFFFF; border: none;">Logout </button>
             </form>
-              <a href="#"><button class="button2"> {{request.user.username}}</button></a>
-              <img class="img123" src="{% static 'authentication/prof1.png' %}">
+              <a href="{% url 'profile' %}"><button class="button2"> {{request.user.username}}</button></a>
+              <img class="img123" src="{{ user.userprofile.profile_pic.url }}">
+
                  {% endif %}
         </div>
 

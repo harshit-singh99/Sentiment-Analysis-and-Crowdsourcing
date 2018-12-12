@@ -1,4 +1,8 @@
 <style>
+    td{
+        background-color: #FFFFFF;
+        border: 1px solid black;
+    }
     .button1 {
             background-color: black;
             border: none;
@@ -28,11 +32,30 @@
 </div>
 
 <table style="border: 1px solid black;border-collapse: separate;border-spacing: 15px">
+<tr>
+<td>
+    Time
+</td>
+    <td>
+        User
+    </td>
+    <td>
+        Review
+    </td>
+
+</tr>
 {% for i in reviews %}
     <tr>
-    <td style="background-color: #FFFFFF;border: 1px solid black">
-        {{ i.review }}<br/>
+    <td>
+        {{ i.time }}, <br/>
     </td>
+    <td>
+        {{ i.user }}
+    </td>
+    <td >
+        {{ i.review }}
+    </td >
+
     </tr>
 {% endfor %}
 </table>

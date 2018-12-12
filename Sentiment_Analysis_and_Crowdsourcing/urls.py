@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from . import  views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 
@@ -27,6 +28,14 @@ urlpatterns = [
     path('auth/', include('social_django.urls', namespace='social')),
     path('', views.home, name='home'),
     path('predict/', include('predictReview.urls')),
-    path('review/', include('one_page.urls'))
+    path('review/', include('one_page.urls')),
+    path('credits/',include('credits.urls')),
+    path('data_analysis/', include('dataAnalysis.urls')),
+    path('crowdsourcing/', include('crowdSourcing.urls')),
+    path('api/', include('api.urls')),
+    path('crowdsourcing/', include('crowdSourcing.urls')),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

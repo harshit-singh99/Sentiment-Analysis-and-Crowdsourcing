@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -9,20 +10,29 @@ from django.contrib.contenttypes.fields import GenericRelation
 class Labeled(models.Model):
     review = models.CharField(max_length=10000)
     polarity = models.BooleanField()
+    user = models.ForeignKey(User, on_delete='CASCADE')
+    time = models.DateTimeField(auto_now=True)
 
     content_type = models.ForeignKey(ContentType, on_delete='CASCADE')
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
+
+    def __str__(self):
+        return self.user.username
 
 
 class Unlabeled(models.Model):
     review = models.CharField(max_length=10000)
     score = models.IntegerField(default=0)
+    user = models.ForeignKey(User, on_delete='CASCADE')
+    time = models.DateTimeField(auto_now=True)
 
     content_type = models.ForeignKey(ContentType, on_delete='CASCADE')
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
+    def __str__(self):
+        return self.user.username
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)

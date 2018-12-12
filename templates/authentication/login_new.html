@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% block headblock %}
-
+    <title>Login </title>
     <style>
 
         .login-page {
@@ -180,7 +180,7 @@
             <br>
             <button class="loginpage-loginbutton">Login</button><br><br>
             <a href="{% url 'password_reset' %}" style="color: #28a745; text-decoration: none">Forgot/reset password? </a>
-            <p class="message">Not registered? <a href="{% url 'signup' %}">Create an account</a></p><br>
+            <p class="message">Not registered? <a href="{% url 'register' %}">Create an account</a></p><br>
             <hr>
 
         </form>
