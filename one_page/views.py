@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -36,6 +37,7 @@ def write_review(request):
     option = options[request.POST['option']]
     idd = int(request.POST['idd'])
     new_data = request.POST['review']
+    user1 = request.user
     content_object = option.objects.get(pk=idd)
-    Unlabeled.objects.create(content_object=content_object, review=new_data)
+    Unlabeled.objects.create(content_object=content_object, review=new_data,user=user1)
     return HttpResponse(status=200)
