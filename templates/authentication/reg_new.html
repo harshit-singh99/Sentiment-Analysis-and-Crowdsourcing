@@ -4,7 +4,7 @@
 
 {% block headblock %}
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Sign Up</title>
     <style>
          body {
             background-image: url("{% static 'thor.png' %}");
@@ -179,9 +179,12 @@
 
     <img src="{% static 'logo_new3.png' %}">
     <br>
-        <form class = "login-form" action = "{% url 'signup' %}"  method = "post">
+        <form class = "login-form" action = "{% url 'signup' %}"  method = "post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form }}
+
+                {{ form }}
+
+
              <button class="signuppage-signupbutton">signup</button>
             <p class="message">Already registered? <a href="{% url 'login' %}">Log In here </a></p><br>
         </form>

@@ -1,6 +1,7 @@
 {% extends 'authentication/layout.html' %}
 {% load static from staticfiles %}
 {% block headblock %}
+    <title>Reviews</title>
     <style>
         body{
             background-image: url("{% static 'bg5.jpg' %}");
@@ -13,11 +14,11 @@
             position: relative;
             margin: auto;
             width:950px;
-            height:610px;
+            height:550px;
             box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
             background-color: white;
             border-radius: 10px;
-            overflow: scroll;
+            overflow: auto;
             opacity: 0.95;
     }
     </style>
@@ -48,6 +49,7 @@
                 let option = $("#select_option").val();
                 let idd = $(this).val();
                 if(idd == "invalid"){
+                    $("#show_reviews").html("");
                     return;
                 }
                 $.post(
@@ -91,6 +93,8 @@
                 let url = "{% url 'show_list' %}";
                 let option = $(this).val();
                 if(option=="invalid"){
+                    $("#select_name").html("<option value=\"invalid\">--Select Previous--</option>");
+                    $("#show_reviews").html("");
                     return;
                 }
                 $.post(

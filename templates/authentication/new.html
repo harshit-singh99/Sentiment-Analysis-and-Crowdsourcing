@@ -1,9 +1,17 @@
 {% extends "authentication/layout.html" %}
 {% load static from staticfiles %}
 
+
 {% block headblock %}
-    <title>Login </title>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
     <style>
+         body {
+            background-image: url("{% static 'thor.png' %}");
+             background-size: 100%;
+             background-repeat: no-repeat;
+             background-attachment: fixed;
+        }
 
         .login-page {
             width: 360px;
@@ -32,7 +40,8 @@
             box-sizing: border-box;
             font-size: 14px;
         }
-        .loginpage-loginbutton {
+
+        .signuppage-signupbutton {
             background-color: #4CAF50;
             border: none;
             color: white;
@@ -89,12 +98,15 @@
         .container .info span .fa {
             color: #EF3B3A;
         }
-        body {
-                background-image: url("{% static 'thor.png' %}");
-            background-size: 100% ;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }
+        {#body {#}
+        {#    background: #76b852; /* fallback for old browsers */#}
+        {#    background: -webkit-linear-gradient(right, #76b852, #8DC26F);#}
+        {#    background: -moz-linear-gradient(right, #76b852, #8DC26F);#}
+        {#    background: -o-linear-gradient(right, #76b852, #8DC26F);#}
+        {#    background: linear-gradient(to left, #76b852, #8DC26F);#}
+        {#    font-family: "Roboto", sans-serif;#}
+        {##}
+        {#}#}
         .loginBtn {
             box-sizing: border-box;
             position: relative;
@@ -162,35 +174,21 @@
 {% endblock headblock %}
 
 {% block content %}
-
 <div class="login-page">
-
     <div class="form">
+
     <img src="{% static 'logo_new3.png' %}">
     <br>
-        <form class="login-form" method="post" action="{% url 'signin' %}">
+        <form class = "login-form" action = "{% url 'register' %}"  method = "post" enctype="multipart/form-data">
             {% csrf_token %}
-            {% if form.non_field_errors %}
-               {{ error }}
-            {% endif %}
-            {{ form}}
-            {% if request.GET.next %}
-                <input type="hidden" name="next" value="{{ request.GET.next }}">
-            {% endif %}
-            <br>
-            <button class="loginpage-loginbutton">Login</button><br><br>
-            <a href="{% url 'password_reset' %}" style="color: #28a745; text-decoration: none">Forgot/reset password? </a>
-            <p class="message">Not registered? <a href="{% url 'register' %}">Create an account</a></p><br>
-            <hr>
+                {{ u_form }}
+                {{ p_form }}
 
+
+             <button class="signuppage-signupbutton">signup</button>
+            <p class="message">Already registered? <a href="{% url 'login' %}">Log In here </a></p><br>
         </form>
-        <a href="{% url 'social:begin' 'facebook' %}"> <button class="loginBtn loginBtn--facebook">
-            Login with Facebook
-        </button></a>
 
-        <br>
-        <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="loginBtn loginBtn--google">Login with Google
-        </button></a>
 
 
     </div>

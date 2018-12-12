@@ -16,9 +16,9 @@
             position: relative;
             margin: auto;
             width:850px;
-            height:580px;
+            height:560px;
             box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
-            background-color: white;
+            background-color:  rgba(255, 255, 255, 0.7);
             border-radius: 10px;
         }
         .button3,input[type="file"]{
@@ -41,32 +41,6 @@
         input[type="file"]:hover{
             background-color:#5B7BD5 ;
         }
-    {#    .search_categories{#}
-            {#font-size: 13px;#}
-    {#        width: 60%;#}
-    {#    padding: 4px 2px 1px ;#}
-    {#        background: #fff;#}
-    {#        border: 1px solid #ccc;#}
-    {#        border-radius: 6px;#}
-            {#overflow: hidden;#}
-    {#        position: relative;#}
-    {#    }#}
-    {##}
-    {#    .search_categories .select{#}
-    {#        width: 40%;#}
-    {##}
-    {#        background:url("{% static 'arrow.png' %}") no-repeat;#}
-    {#    }#}
-    {##}
-    {#    .search_categories .select select{#}
-        {#background: transparent;#}
-    {##}
-    {#        border: 0;#}
-    {#        border-radius: 0;#}
-    {#        width:70%;#}
-    {#        position: relative;#}
-    {##}
-    {#    }#}
     </style>
 {% endblock %}
 
@@ -85,6 +59,9 @@
         <label for="fileupload"> Select a file to upload</label>
     <input type="file" name="fileupload" value="fileupload" id="fileupload">
      <br><br>
+        <h5>Please upload '.txt'/'.csv' files</h5>
+        <h5>It costs 200 credits</h5>
+
     <input type="submit" value="submit" class="button3">
     </center>
 </form>

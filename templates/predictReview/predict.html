@@ -16,7 +16,7 @@
             position: relative;
             margin: auto;
             width:850px;
-            height:580px;
+            height:680px;
             box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
             background-color: white;
             border-radius: 10px;
@@ -92,8 +92,10 @@
                 </center>
                 <p>Predict your review with Sentiment Analysis</p>
             <p>Have a file of reviews? Wanna Upload? <a href="batchpredict">Click here</a></p>
+
                 <center>
-                    {{ result }}
+               {{ result }}
+                <br>
                 <textarea name="review" rows = 15 cols = 100  placeholder="{{ review_ph }}"></textarea>
                 <br>
                 <button class="button11">Submit </button>
