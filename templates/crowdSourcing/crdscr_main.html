@@ -1,0 +1,187 @@
+{% extends 'authentication/layout.html' %}}
+{% load static from staticfiles %}
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+{% block headblock %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table{
+            width:80%;
+            border-collapse: collapse;
+            background-color:rgb(108,120,138);
+            opacity: 0.95;
+        }
+        td {
+            width: 50%;
+            margin: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: bold;
+            color: #fff;
+            background-image: url("{% static 'joker.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+        #first {
+            background-color: #4B4D65;
+        }
+
+        .section {
+            padding: 100px;
+            padding-left: 150px;
+        }
+        .section input[type="radio"]{
+            display: none;
+        }
+        .container {
+            margin-bottom: 10px;
+            color: #e9715d;
+        }
+        .container label {
+            position: sticky;
+        }
+
+        /* Base styles for spans */
+        .container span::before,
+        .container span::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        /* Radio buttons */
+        .container span.radio:hover {
+            cursor: pointer;
+        }
+        .container span.radio::before {
+            left: -52px;
+            width: 45px;
+            height: 25px;
+            background-color: #A8AAC1;
+            border-radius: 50px;
+        }
+        .container span.radio::after {
+            left: -49px;
+            width: 17px;
+            height: 17px;
+            border-radius: 10px;
+            background-color: #6C788A;
+            transition: left .25s, background-color .25s;
+        }
+        input[type="radio"]:checked + label span.radio::after {
+            left: -27px;
+            background-color: #EBFF43;
+        }
+        .button{
+            background-color: #379fb4;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.5s;
+        }
+        .button:hover{
+            background-color: #17d5c7;
+
+        }
+
+
+    </style>
+{% endblock %}
+{% block content %}
+<center>
+	<form method="post" action = {% url 'crdscr_next' %}>
+	{% csrf_token %}
+    <table>
+        <tr>
+            <td>
+                <section id="first" class="section">
+                    <textarea name="rev1" disabled>{{ review1 }}</textarea>
+
+                    <div class="container">
+                        <input type="radio" name="ans1" id="radio-1" value="1">
+                        <label for="radio-1"><span class="radio"><b>Positive</b></span></label>
+                    </div>
+                    <div class="container">
+                        <input type="radio" name="ans1" id="radio-2" value="0">
+                        <label for="radio-2"><span class="radio"><b>Negative</b></span></label>
+                    </div>
+
+                </section>
+                <!--seocnde review-->
+            </td>
+            <td>
+                <section id="first" class="section">
+                    <textarea name="rev1" disabled>{{ review2 }}</textarea>
+
+                    <div class="container">
+                        <input type="radio" name="ans2" id="radio-3" value="1">
+                        <label for="radio-3"><span class="radio"><b>Positive</b></span></label>
+                    </div>
+                    <div class="container">
+                        <input type="radio" name="ans2" id="radio-4" value="0">
+                        <label for="radio-4"><span class="radio"><b>Negative</b></span></label>
+                    </div>
+                </section>
+            </td>
+        </tr>
+        <!--Third review-->
+        <tr>
+            <td>
+                <section id="first" class="section">
+                    <textarea name="rev1" disabled>{{ review3 }}</textarea>
+
+                    <div class="container">
+                        <input type="radio" name="ans3" id="radio-5" value="1">
+                        <label for="radio-5"><span class="radio"><b>Positive</b></span></label>
+                    </div>
+                    <div class="container">
+                        <input type="radio" name="ans3" id="radio-6" value="0">
+                        <label for="radio-6"><span class="radio"><b>Negative</b></span></label>
+                    </div>
+
+                </section>
+            </td>
+            <td>
+                <!--fourth review-->
+                <section id="first" class="section">
+                    <textarea name="rev1" disabled>{{ review4 }}</textarea>
+
+                    <div class="container">
+                        <input type="radio" name="ans4" id="radio-7" value="1">
+                        <label for="radio-7"><span class="radio"><b>Positive</b></span></label>
+                    </div>
+                    <div class="container">
+                        <input type="radio" name="ans4" id="radio-8" value="0">
+                        <label for="radio-8"><span class="radio"><b>Negative</b></span></label>
+                    </div>
+
+                </section>
+            </td>
+        </tr>
+    </table>
+        <input type="submit" class="button">
+	</form>
+	<p>
+	Terms:<br>
+	1. You will earn  1 credit if all the answers are correct.
+	<br><br>
+	</p>    
+	{{ result }}
+</center>
+<center>
+    </center>
+{% endblock %}

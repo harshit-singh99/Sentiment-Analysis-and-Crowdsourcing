@@ -1,0 +1,86 @@
+{% extends 'authentication/layout.html' %}
+{% load static from staticfiles %}
+{% block headblock %}
+    <title>Data Analysis</title>
+    <style>
+        body{
+            background-image: url("{% static 'data.jpg' %}");
+            color: black ;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+    .div1{
+            position: relative;
+            margin: auto;
+            width:950px;
+            height:570px;
+            box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
+            background-color: white;
+            border-radius: 10px;
+            overflow: auto;
+            opacity: 0.95;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="div1">
+        <center>
+        <form action={% url 'stats' %} method=post>
+            {%csrf_token%}
+            <select id="select_option" name = "option">
+                <option value="invalid" >--Select Option--</option>
+                {% for i in options %}
+                    <option value="{{ i }}">
+                    {{ i }}
+                    </option>
+                {% endfor %}
+            </select>
+            <select id="select_name" name = "idd">
+                <option value="invalid" >--Select Previous--</option>
+            </select><br>
+            <span id="button">
+            </span>
+        </form>
+        </center>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script>
+
+
+
+            $("#select_name").change(function () {
+                let option = $("#select_option").val();
+                let idd = $(this).val();
+                button = "<input type=submit> Data analysis Requires 200 credits";
+                if(option == "invalid" || idd == "invalid"){
+                    $("#button").html("");
+                    return;
+                }
+                $("#button").html(button);
+                
+            });
+
+            $("#select_option").change(function () {
+                let url = "{% url 'da_show_list' %}";
+                let option = $(this).val();
+                if(option=="invalid"){
+                        console.log('s');
+                        $("#select_name").html('<option value="invalid" >--Select Previous--</option>');
+                    $("#button").html("");
+                    return;
+                }
+                $.post(
+                    url,
+                    {
+                        'option': option,
+                        'csrfmiddlewaretoken':"{{ csrf_token }}"
+                    },
+                    function (data) {
+                        $("#select_name").html(data);
+                        $("#show_reviews").html("");
+                    }
+
+                );
+            });
+        </script>
+{% endblock %}
